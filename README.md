@@ -54,3 +54,23 @@ Use ODF in one of the following ways:
     echo 1 > /proc/self/use_odf
     /path/to/your/program args
     ```
+-------
+### WIP
+
+```
+cd crosscompile
+bash pre.sh
+bash gcc.sh
+bash binutils.sh
+export PATH=/usr/cross/bin:$PATH
+
+sudo chown -R "$USER:$USER" .
+
+scripts/config --disable SYSTEM_TRUSTED_KEYS
+scripts/config --disable SYSTEM_REVOCATION_KEYS
+
+make menuconfig CROSS_COMPILE=odf-
+make -j $(nproc) --silent CROSS_COMPILE=odf-
+sudo make modules_install --silent
+sudo make install
+```
